@@ -29,20 +29,54 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let socialMedia = `${variables.socialMediaPosition}`;
+  if (variables.socialMediaPosition == false) socialMedia = "position-right";
+
+  let roleChange = `${variables.role}`;
+  if (variables.role == null) roleChange = "";
+  else if (variables.role == "Web Developer") roleChange = "Web Developer";
+  else if (variables.role == "Floor Planner") roleChange = "Floor Planner";
+  else if (variables.role == false) roleChange = "Technical Writter";
+
+  let cityChange = `${variables.city}`;
+  if (variables.city == null) cityChange = "";
+  else if (variables.city == "Miami") cityChange = "Miami";
+  else if (variables.city == "Munich") cityChange = "Munich";
+  else if (variables.city == "Caracas") cityChange = "Caracas";
+  else if (variables.city == false) cityChange = "Toronto";
+
+  let countryChange = `${variables.country}`;
+  if (variables.country == null) countryChange = "";
+  else if (variables.country == "USA") countryChange = "USA";
+  else if (variables.country == "Germany") countryChange = "Germany";
+  else if (variables.country == "Venezuela") countryChange = "Venezuela";
+  else if (variables.country == false) countryChange = "Canada";
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
+          <img src="${
+            variables.name == null
+              ? variables.avatarURL
+              : "https://www.emk.com/product/image/medium/iktuv21874_1.jpg"
+          }" class="photo" />
           <h1>${variables.name == null ? "" : variables.name} ${
     variables.lastname == null ? "" : variables.lastname
   }</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h2>${roleChange}</h2>
+          <h3>${cityChange},${countryChange}</h3>
+          <ul class=${socialMedia}>
+            <li><a href="https://twitter.com/${
+              variables.twitter == null ? "" : variables.twitter
+            }"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${
+              variables.github == "alesanchezr" ? "" : variables.github
+            }"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/${
+              variables.linkedin == null ? "" : variables.linkedin
+            }"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/${
+              variables.instagram == null ? "" : variables.instagram
+            }"><i class="fab fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
